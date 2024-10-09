@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meri Website - Approval System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: white;
+            text-align: center;
+            padding-top: 50px;
+            background: url('https://iili.io/dyUhbzx.jpg') no-repeat center center fixed;
+            background-size: cover;
+        }
+        .hidden {
+            display: none;
+        }
+        .input-field {
+            margin: 10px 0;
+        }
+        .input-field input {
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid transparent;
+            border-radius: 5px;
+            transition: border 0.3s;
+        }
+        .input-field input:focus {
+            border: 2px solid #61dafb;
+            outline: none;
+        }
+        .approval-list {
+            list-style-type: none;
+            padding: 0;
+            background: url('https://iili.io/dyUEzAl.jpg') no-repeat center center fixed;
+            background-size: cover;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .approval-item {
+            margin: 10px 0;
+        }
+        .approval-item button {
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>The Faizu !hi you Login Fast</h1>
+    
+    <div id="loginSection">
+        <div class="input-field">
+            <input type="text" id="username" placeholder="Enter your username" />
+        </div>
+        <div class="input-field">
+            <input type="password" id="password" placeholder="Enter your password" />
+        </div>
+        <button onclick="login()">Login</button>
+        <p><a href="https://www.facebook.com/The.drugs.ft.chadwick.67" target="_blank">Contact Us</a></p>
+    </div>
+
+    <div id="approvalSection" class="hidden">
+        <h2>You Need Approval Fast</h2>
+        
+        <div class="input-field">
+            <input type="text" id="approvalKey" placeholder="Send Your Key" />
+            <button onclick="sendKey()">Send Key</button>
+        </div>
+        
+        <button onclick="showApprovalPasswordModal()">Show All Approvals</button>
+
+        <div id="approvals" class="hidden">
+            <h3>Approval Requests:</h3>
+            <ul id="approvalList" class="approval-list"></ul>
+        </div>
+    </div>
+
+    <div id="approvalPasswordModal" class="hidden">
+        <h2>Enter Password to See All Approvals</h2>
+        <input type="password" id="approvalPassword" placeholder="Password" />
+        <button onclick="checkApprovalPassword()">Submit</button>
+        <button onclick="closeApprovalPasswordModal()">Cancel</button>
+    </div>
+
+    <script>
+        const correctUsername = "FaizuOnFire";
+        const correctPassword = "FaizuHere";
+        const approvalPassword = "818417";
+        let approvals = [];
+
+        function login() {
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            if (username === correctUsername && password === correctPassword) {
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('approvalSection').classList.remove('hidden');
+                document.body.style.background = "url('https://iili.io/dyUEzAl.jpg') no-repeat center center fixed";
+                document.body.style.backgroundSize = "cover";
+            }
+        }
+
+        function showApprovalPasswordModal() {
+            document.getElementById('approvalPasswordModal').classList.remove('hidden');
+        }
+
+        function closeApprovalPasswordModal() {
+            document.getElementById('approvalPasswordModal').classList.add('hidden');
+        }
+
+        function checkApprovalPassword() {
+            const inputPassword = document.getElementById('approvalPassword').value;
+            if (inputPassword === approvalPassword) {
+                document.getElementById('approvalPasswordModal').classList.add('hidden');
+                showApprovals();
+            }
+        }
+
+        function sendKey() {
+            const key = document.getElementById('approvalKey').value;
+            if (key) {
+                approvals.push(key);
+                document.getElementById('approvalKey').value = '';
+                alert('Key sent and added for approval!');
+            } else {
+                alert('Please enter a key!');
+            }
+        }
+
+        function showApprovals() {
+            document.getElementById('approvals').classList.remove('hidden');
+            const approvalList = document.getElementById('approvalList');
+            approvalList.innerHTML = '';
+            approvals.forEach((request, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'approval-item';
+                listItem.textContent = request;
+
+                const acceptButton = document.createElement('button');
+                acceptButton.textContent = 'Accept';
+                acceptButton.onclick = () => acceptApproval(index);
+
+                const rejectButton = document.createElement('button');
+                rejectButton.textContent = 'Reject';
+                rejectButton.onclick = () => rejectApproval(index);
+
+                listItem.appendChild(acceptButton);
+                listItem.appendChild(rejectButton);
+                approvalList.appendChild(listItem);
+            });
+        }
+
+        function acceptApproval(index) {
+            alert(`Approval request "${approvals[index]}" accepted!`);
+            approvals.splice(index, 1);
+            showApprovals();
+            window.open('the.html'); // Open the specified HTML file
+        }
+
+        function rejectApproval(index) {
+            alert(`Approval request "${approvals[index]}" rejected!`);
+            approvals.splice(index, 1);
+            showApprovals();
+        }
+    </script>
+</body>
+</html>
+

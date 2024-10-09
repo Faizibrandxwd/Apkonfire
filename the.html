@@ -1,0 +1,141 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <style>
+        body {
+            background-image: url('https://iili.io/dy62Hga.jpg');
+            background-size: cover;
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+        nav {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            margin: 15px;
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+        nav a:hover {
+            text-decoration: underline;
+        }
+        section {
+            padding: 20px;
+            text-align: center;
+            display: none; /* Initially hide sections */
+        }
+        .active {
+            display: block; /* Show active section */
+        }
+        .server-pics {
+            position: relative; /* Relative positioning for play button */
+            display: inline-block;
+        }
+        .server-pics img {
+            width: 100%; /* Set image width to fit */
+            max-width: 200px; /* Set max width for server images */
+            height: auto; /* Maintain aspect ratio */
+            margin: 10px;
+            cursor: pointer;
+            border: 3px solid white; /* Frame color and size */
+            border-radius: 5px; /* Rounded corners */
+            padding: 5px; /* Padding between image and border */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+        }
+        .play-button {
+            position: absolute;
+            bottom: 10px; /* Adjust position */
+            left: 50%; /* Center horizontally */
+            transform: translateX(-50%); /* Center align */
+            background-color: rgba(0, 0, 0, 0.7); /* Dark background */
+            color: white; /* Text color */
+            border: none;
+            border-radius: 50%;
+            width: 30px; /* Button size */
+            height: 30px; /* Button size */
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px; /* Icon size */
+        }
+        .text-overlay {
+            position: relative;
+            display: inline-block;
+        }
+        .text-overlay p {
+            display: none; /* Initially hide text */
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 5px;
+            margin: 0; /* Remove margin */
+            position: absolute;
+            top: 0; /* Position text at the top of the image */
+            left: 0;
+            right: 0;
+            text-align: center; /* Center align text */
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#" onclick="showSection('home')">Home</a>
+    <a href="#" onclick="showSection('server')">Server</a>
+</nav>
+
+<section id="home" class="active">
+    <h1>Assalam-o-Alaikum Dear Users</h1>
+    <p>I made this only for you. Enjoy this APK! If you cannot understand anything, please contact me: 
+    <a href="https://www.facebook.com/The.drugs.ft.chadwick.67" style="color: white;">Facebook</a></p>
+</section>
+
+<section id="server">
+    <h1>Server Information</h1>
+    <p>Click on the images for more info:</p>
+    <div class="server-pics">
+        <div class="text-overlay">
+            <a href="#" onclick="showText('multiConvoText')">
+                <img src="https://iili.io/dygmwKl.jpg" alt="Multi Convo">
+                <button class="play-button">&#9658;</button> <!-- Play button -->
+            </a>
+            <p id="multiConvoText" style="display: none;">This is multi convo OK</p>
+        </div>
+        
+        <div class="text-overlay">
+            <a href="#" onclick="showText('singleMultiConvoText')">
+                <img src="https://iili.io/dygmNl2.jpg" alt="Single + Multi Convo">
+                <button class="play-button">&#9658;</button> <!-- Play button -->
+            </a>
+            <p id="singleMultiConvoText" style="display: none;">This is single + multi convo</p>
+        </div>
+    </div>
+</section>
+
+<script>
+    function showSection(sectionId) {
+        const sections = document.querySelectorAll('section');
+        sections.forEach(section => {
+            section.classList.remove('active');
+        });
+        document.getElementById(sectionId).classList.add('active');
+    }
+
+    function showText(textId) {
+        const texts = document.querySelectorAll('p[id$="Text"]');
+        texts.forEach(text => {
+            text.style.display = 'none';
+        });
+        document.getElementById(textId).style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
